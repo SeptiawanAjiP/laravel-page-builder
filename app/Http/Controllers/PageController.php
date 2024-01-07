@@ -10,7 +10,7 @@ class PageController extends Controller
     // Menampilkan semua halaman
     public function index()
     {
-        $pages = Page::all();
+        $pages = Page::orderBy('created_at', 'DESC')->get();
         return view('pages.index', compact('pages'));
     }
 
@@ -25,8 +25,7 @@ class PageController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
-            'content' => 'required',
+            'short_description' => 'required'
         ]);
 
         Page::create($request->all());

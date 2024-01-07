@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('short_description');
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

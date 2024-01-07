@@ -14,7 +14,8 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::resource('/', PageController::class);
+Route::get('/', [PageController::class, 'index']);
+Route::resource('/pages',PageController::class);
 Route::get('/page-builder', function () {
     return view('page-builder.index');
 });
