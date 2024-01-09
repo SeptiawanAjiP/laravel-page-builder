@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>GrapesJS Preset Webpage</title>
-    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/grapesjs"></script>
-    <script src="https://unpkg.com/grapesjs-preset-webpage"></script>
+    <link href="{{asset('grapesjs/css/grapes.min.css')}}" rel="stylesheet">
+    <script src="{{asset('grapesjs/js/grapes.min.js')}}"></script>
+    <script src="{{asset('grapesjs/js/grapes-preset-webpage.js')}}"></script>
     <script src="https://unpkg.com/grapesjs-preset-newsletter"></script>
     <script src="https://unpkg.com/grapesjs-navbar"></script>
     <script src="https://unpkg.com/grapesjs-plugin-forms"></script>
