@@ -70,4 +70,5 @@ class PageController extends Controller
 
         return redirect()->route('pages.index')->with('success', 'Page deleted successfully');
     }
+
 }
