@@ -27,8 +27,13 @@ class PageController extends Controller
             'title' => 'required',
             'short_description' => 'required'
         ]);
+        $jsonFilePath = storage_path('app/template/default.json');
+        $jsonContent = file_get_contents($jsonFilePath);
 
-        Page::create($request->all());
+        $requestData = $request->all();
+        $requestData['content'] = $jsonContent;
+
+        Page::create($requestData);
 
         return redirect()->route('pages.index')->with('success', 'Page created successfully');
     }
@@ -37,7 +42,7 @@ class PageController extends Controller
     public function show($id)
     {
         $page = Page::findOrFail($id);
-        return view('pages.show', compact('page'));
+        return view('pages.preview', compact('page'));
     }
 
     // Menampilkan formulir untuk mengedit halaman
@@ -52,8 +57,7 @@ class PageController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'short_description' => 'required',
-            'content' => 'required',
+            'short_description' => 'required'
         ]);
 
         $page = Page::findOrFail($id);

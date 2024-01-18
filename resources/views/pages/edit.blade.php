@@ -1,447 +1,52 @@
-<!doctype html>
-<html>
+<!-- resources/views/pages/create.blade.php -->
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <title>Laravel Page Builder</title>
     <meta charset="utf-8">
-    <title>GrapesJS Preset Webpage</title>
-    <link href="{{ asset('grapesjs/css/grapes.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('grapesjs/js/grapes.min.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-preset-webpage.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-preset-newsletter.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-navbar.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-plugin-forms.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-blocks-bootstrap4.min.js') }}"></script>
-    <script src="https://unpkg.com/grapesjs-blocks-flexbox@1.0.1/dist/index.js"></script>
-    <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2>Page Builder - Drag & Drop</h2>
+                <p>Simplify Website Creation - Drag, Drop, Done!</p>
+            </div>
+            <a href="{{ route('pages.create') }}" class="btn btn-success">+ Add</a>
+        </div>
 
-    <div id="gjs" style="height:0px; overflow:hidden">
-        {!! $page->content !!}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>Edit Page</h5>
+            </div>
+            <div class="card-body">
+                @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                <form action="{{ route('pages.update', $page->id) }}"" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{$page->title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="short_description">Short Description</label>
+                        <textarea class="form-control" id="short_description" name="short_description" rows="3" required>{{$page->short_description}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="blocks"></div>
-
-
-    <script type="text/javascript">
-        const projectId = '{{ $page->id }}'
-        const loadProjectEndpoint = `{{url('/api/pages/${projectId}/load-project')}}`;
-        const storeProjectEndpoint = `{{url('/api/pages/${projectId}/store-project')}}`;
-
-
-        window.editor = grapesjs.init({
-            height: '100%',
-            container: '#gjs',
-            fromElement: true,
-            showOffsets: true,
-
-            selectorManager: {
-                componentFirst: true
-            },
-            storageManager: {
-                type: 'remote',
-                stepsBeforeSave: 3,
-                options: {
-                    remote: {
-                        urlLoad: loadProjectEndpoint,
-                        urlStore: storeProjectEndpoint,
-                        fetchOptions: opts => (opts.method === 'POST' ? {
-                            method: 'PATCH'
-                        } : {}),
-                        onStore: data => ({
-                            id: projectId,
-                            data
-                        }),
-                        onLoad: result => result.data,
-                    }
-                }
-            },
-            styleManager: {
-                sectors: [{
-                    name: 'General',
-                    properties: [{
-                            extend: 'float',
-                            type: 'radio',
-                            default: 'none',
-                            options: [{
-                                    value: 'none',
-                                    className: 'fa fa-times'
-                                },
-                                {
-                                    value: 'left',
-                                    className: 'fa fa-align-left'
-                                },
-                                {
-                                    value: 'right',
-                                    className: 'fa fa-align-right'
-                                }
-                            ],
-                        },
-                        'display',
-                        {
-                            extend: 'position',
-                            type: 'select'
-                        },
-                        'top',
-                        'right',
-                        'left',
-                        'bottom',
-                    ],
-                }, {
-                    name: 'Dimension',
-                    open: false,
-                    properties: [
-                        'width',
-                        {
-                            id: 'flex-width',
-                            type: 'integer',
-                            name: 'Width',
-                            units: ['px', '%'],
-                            property: 'flex-basis',
-                            toRequire: 1,
-                        },
-                        'height',
-                        'max-width',
-                        'min-height',
-                        'margin',
-                        'padding'
-                    ],
-                }, {
-                    name: 'Typography',
-                    open: false,
-                    properties: [
-                        'font-family',
-                        'font-size',
-                        'font-weight',
-                        'letter-spacing',
-                        'color',
-                        'line-height',
-                        {
-                            extend: 'text-align',
-                            options: [{
-                                    id: 'left',
-                                    label: 'Left',
-                                    className: 'fa fa-align-left'
-                                },
-                                {
-                                    id: 'center',
-                                    label: 'Center',
-                                    className: 'fa fa-align-center'
-                                },
-                                {
-                                    id: 'right',
-                                    label: 'Right',
-                                    className: 'fa fa-align-right'
-                                },
-                                {
-                                    id: 'justify',
-                                    label: 'Justify',
-                                    className: 'fa fa-align-justify'
-                                }
-                            ],
-                        },
-                        {
-                            property: 'text-decoration',
-                            type: 'radio',
-                            default: 'none',
-                            options: [{
-                                    id: 'none',
-                                    label: 'None',
-                                    className: 'fa fa-times'
-                                },
-                                {
-                                    id: 'underline',
-                                    label: 'underline',
-                                    className: 'fa fa-underline'
-                                },
-                                {
-                                    id: 'line-through',
-                                    label: 'Line-through',
-                                    className: 'fa fa-strikethrough'
-                                }
-                            ],
-                        },
-                        'text-shadow'
-                    ],
-                }, {
-                    name: 'Decorations',
-                    open: false,
-                    properties: [
-                        'opacity',
-                        'border-radius',
-                        'border',
-                        'box-shadow',
-                        'background', // { id: 'background-bg', property: 'background', type: 'bg' }
-                    ],
-                }, {
-                    name: 'Extra',
-                    open: false,
-                    buildProps: [
-                        'transition',
-                        'perspective',
-                        'transform'
-                    ],
-                }, {
-                    name: 'Flex',
-                    open: false,
-                    properties: [{
-                        name: 'Flex Container',
-                        property: 'display',
-                        type: 'select',
-                        defaults: 'block',
-                        list: [{
-                                value: 'block',
-                                name: 'Disable'
-                            },
-                            {
-                                value: 'flex',
-                                name: 'Enable'
-                            }
-                        ],
-                    }, {
-                        name: 'Flex Parent',
-                        property: 'label-parent-flex',
-                        type: 'integer',
-                    }, {
-                        name: 'Direction',
-                        property: 'flex-direction',
-                        type: 'radio',
-                        defaults: 'row',
-                        list: [{
-                            value: 'row',
-                            name: 'Row',
-                            className: 'icons-flex icon-dir-row',
-                            title: 'Row',
-                        }, {
-                            value: 'row-reverse',
-                            name: 'Row reverse',
-                            className: 'icons-flex icon-dir-row-rev',
-                            title: 'Row reverse',
-                        }, {
-                            value: 'column',
-                            name: 'Column',
-                            title: 'Column',
-                            className: 'icons-flex icon-dir-col',
-                        }, {
-                            value: 'column-reverse',
-                            name: 'Column reverse',
-                            title: 'Column reverse',
-                            className: 'icons-flex icon-dir-col-rev',
-                        }],
-                    }, {
-                        name: 'Justify',
-                        property: 'justify-content',
-                        type: 'radio',
-                        defaults: 'flex-start',
-                        list: [{
-                            value: 'flex-start',
-                            className: 'icons-flex icon-just-start',
-                            title: 'Start',
-                        }, {
-                            value: 'flex-end',
-                            title: 'End',
-                            className: 'icons-flex icon-just-end',
-                        }, {
-                            value: 'space-between',
-                            title: 'Space between',
-                            className: 'icons-flex icon-just-sp-bet',
-                        }, {
-                            value: 'space-around',
-                            title: 'Space around',
-                            className: 'icons-flex icon-just-sp-ar',
-                        }, {
-                            value: 'center',
-                            title: 'Center',
-                            className: 'icons-flex icon-just-sp-cent',
-                        }],
-                    }, {
-                        name: 'Align',
-                        property: 'align-items',
-                        type: 'radio',
-                        defaults: 'center',
-                        list: [{
-                            value: 'flex-start',
-                            title: 'Start',
-                            className: 'icons-flex icon-al-start',
-                        }, {
-                            value: 'flex-end',
-                            title: 'End',
-                            className: 'icons-flex icon-al-end',
-                        }, {
-                            value: 'stretch',
-                            title: 'Stretch',
-                            className: 'icons-flex icon-al-str',
-                        }, {
-                            value: 'center',
-                            title: 'Center',
-                            className: 'icons-flex icon-al-center',
-                        }],
-                    }, {
-                        name: 'Flex Children',
-                        property: 'label-parent-flex',
-                        type: 'integer',
-                    }, {
-                        name: 'Order',
-                        property: 'order',
-                        type: 'integer',
-                        defaults: 0,
-                        min: 0
-                    }, {
-                        name: 'Flex',
-                        property: 'flex',
-                        type: 'composite',
-                        properties: [{
-                            name: 'Grow',
-                            property: 'flex-grow',
-                            type: 'integer',
-                            defaults: 0,
-                            min: 0
-                        }, {
-                            name: 'Shrink',
-                            property: 'flex-shrink',
-                            type: 'integer',
-                            defaults: 0,
-                            min: 0
-                        }, {
-                            name: 'Basis',
-                            property: 'flex-basis',
-                            type: 'integer',
-                            units: ['px', '%', ''],
-                            unit: '',
-                            defaults: 'auto',
-                        }],
-                    }, {
-                        name: 'Align',
-                        property: 'align-self',
-                        type: 'radio',
-                        defaults: 'auto',
-                        list: [{
-                            value: 'auto',
-                            name: 'Auto',
-                        }, {
-                            value: 'flex-start',
-                            title: 'Start',
-                            className: 'icons-flex icon-al-start',
-                        }, {
-                            value: 'flex-end',
-                            title: 'End',
-                            className: 'icons-flex icon-al-end',
-                        }, {
-                            value: 'stretch',
-                            title: 'Stretch',
-                            className: 'icons-flex icon-al-str',
-                        }, {
-                            value: 'center',
-                            title: 'Center',
-                            className: 'icons-flex icon-al-center',
-                        }],
-                    }]
-                }],
-            },
-            plugins: [
-                'gjs-blocks-basic',
-                'grapesjs-plugin-forms',
-                'grapesjs-component-countdown',
-                'grapesjs-plugin-export',
-                'grapesjs-tabs',
-                'grapesjs-custom-code',
-                'grapesjs-touch',
-                'grapesjs-parser-postcss',
-                'grapesjs-tooltip',
-                'grapesjs-tui-image-editor',
-                'grapesjs-typed',
-                'grapesjs-style-bg',
-                'grapesjs-preset-webpage',
-                'grapesjs-navbar',
-            ],
-            pluginsOpts: {
-                'gjs-blocks-basic': {
-                    flexGrid: true
-                },
-                'grapesjs-tui-image-editor': {
-                    script: [
-                        // 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js',
-                        'https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js',
-                        'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js',
-                        'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.js'
-                    ],
-                    style: [
-                        'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.css',
-                        'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css',
-                    ],
-                },
-                'grapesjs-tabs': {
-                    tabsBlock: {
-                        category: 'Extra'
-                    }
-                },
-                'grapesjs-typed': {
-                    block: {
-                        category: 'Extra',
-                        content: {
-                            type: 'typed',
-                            'type-speed': 40,
-                            strings: [
-                                'Text row one',
-                                'Text row two',
-                                'Text row three',
-                            ],
-                        }
-                    }
-                },
-                'grapesjs-preset-webpage': {
-                    modalImportTitle: 'Import Template',
-                    modalImportLabel: '<div style="margin-bottom: 10px; font-size: 13px;">Paste here your HTML/CSS and click Import</div>',
-                    modalImportContent: function(editor) {
-                        return editor.getHtml() + '<style>' + editor.getCss() + '</style>'
-                    },
-                },
-            },
-            // Tambahkan event listener untuk menyimpan konten
-            onInit: function() {
-                const saveBtn = editor.Panels.getButton('options', 'export-template');
-                saveBtn.set('attributes', {
-                    title: 'Save Content'
-                });
-
-                saveBtn.set('command', function() {
-                    saveContent();
-                });
-
-                function saveContent() {
-                    const content = editor.getHtml() + '<style>' + editor.getCss() + '</style>';
-
-                    // Kirim data ke server menggunakan AJAX
-                    fetch(saveContentUrl, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Sesuaikan dengan cara Anda untuk mendapatkan CSRF token
-                            },
-                            body: JSON.stringify({
-                                content: content,
-                            }),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Content saved successfully', data);
-                            alert('Content saved successfully');
-                        })
-                        .catch(error => {
-                            console.error('Error saving content', error);
-                            alert('Error saving content');
-                        });
-                }
-            },
-        });
-    </script>
 </body>
 
 </html>
