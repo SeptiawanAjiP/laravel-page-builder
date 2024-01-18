@@ -1,0 +1,55 @@
+{
+    "assets": [],
+    "styles": [
+        {
+            "selectors": [{ "name": "gjs-row", "private": 1 }],
+            "style": {
+                "display": "flex",
+                "justify-content": "flex-start",
+                "align-items": "stretch",
+                "flex-wrap": "nowrap",
+                "padding-top": "10px",
+                "padding-right": "10px",
+                "padding-bottom": "10px",
+                "padding-left": "10px"
+            }
+        },
+        {
+            "selectors": [{ "name": "gjs-row", "private": 1 }],
+            "style": { "flex-wrap": "wrap" },
+            "mediaText": "(max-width: 768px)",
+            "atRuleType": "media"
+        },
+        {
+            "selectors": [{ "name": "gjs-cell", "private": 1 }],
+            "style": {
+                "min-height": "75px",
+                "flex-grow": "1",
+                "flex-basis": "100%"
+            }
+        }
+    ],
+    "pages": [
+        {
+            "frames": [
+                {
+                    "component": {
+                        "type": "wrapper",
+                        "stylable": [
+                            "background",
+                            "background-color",
+                            "background-image",
+                            "background-repeat",
+                            "background-attachment",
+                            "background-position",
+                            "background-size"
+                        ],
+                        "attributes": { "id": "iq2q" }
+                    },
+                    "id": "QPjKujkHrih5afuF"
+                }
+            ],
+            "id": "MtEglcsgDUdI00Ua"
+        }
+    ]
+}
