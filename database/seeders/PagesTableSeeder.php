@@ -14,12 +14,12 @@ class PagesTableSeeder extends Seeder
      */
     public function run()
     {
-      $jsonFilePath = storage_path('app/template/template-1.json');
+      $jsonFilePath = storage_path('app/public/template-1.json');
       $jsonContent = file_get_contents($jsonFilePath);
 
         Page::create([
             'title' => 'Landing Page Berita',
-            'short_description' => 'Menampilkan Halamam Utama Website Berita',
+            'short_description' => 'Menampilkan Halaman Utama Website Berita',
             'content' => $jsonContent,
         ]);
     }
