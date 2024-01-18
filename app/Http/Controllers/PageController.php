@@ -27,7 +27,7 @@ class PageController extends Controller
             'title' => 'required',
             'short_description' => 'required'
         ]);
-        $jsonFilePath = storage_path('app/template/default.json');
+        $jsonFilePath = storage_path('app/public/default.json');
         $jsonContent = file_get_contents($jsonFilePath);
 
         $requestData = $request->all();
