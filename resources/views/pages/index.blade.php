@@ -28,8 +28,8 @@
             
           </div>
           <div class="card-footer">
-            <a href="{{ route('pages.show', $item->id) }}" class="btn btn-primary">Preview</a>
-            <a href="{{ route('pages.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+            <a href="{{ route('pages.edit', $item->id) }}" class="btn btn-primary">Preview</a>
+            <a href="{{route('pages.edit', $item->id) }}" class="btn btn-warning">Edit Info Page</a>
             <a href="#" class="btn btn-danger">Delete</a>
             
           </div>

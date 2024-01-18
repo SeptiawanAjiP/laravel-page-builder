@@ -6,36 +6,26 @@ This is an open-source project that combines the power of Laravel and GrapeJS to
 
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
 - Web-based landing page generator.
 - Integration of Laravel for backend functionalities.
 - GrapeJS for visual page building.
-- ...
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
 
-Make sure you have the following installed on your machine:
-
-- [Composer](https://getcomposer.org/)
-- [Node.js and npm](https://nodejs.org/)
-
-### Installation
+## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-project.git
+    https://github.com/SeptiawanAjiP/laravel-page-builder.git
     ```
 
 2. Navigate to the project directory:
@@ -50,19 +40,13 @@ Make sure you have the following installed on your machine:
     composer install
     ```
 
-4. Install JavaScript dependencies:
-
-    ```bash
-    npm install
-    ```
-
-5. Copy the `.env.example` file to `.env` and configure your database:
+4. Copy the `.env.example` file to `.env` and configure your database:
 
     ```bash
     cp .env.example .env
     ```
 
-6. Generate the application key:
+5. Generate the application key:
 
     ```bash
     php artisan key:generate
@@ -71,7 +55,7 @@ Make sure you have the following installed on your machine:
 7. Migrate the database:
 
     ```bash
-    php artisan migrate
+    php artisan migrate --seed
     ```
 
 8. Start the development server:
@@ -83,11 +67,3 @@ Make sure you have the following installed on your machine:
 ### Usage
 
 Visit `http://localhost:8000` in your browser to access the web-based landing page generator.
-
-## Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
