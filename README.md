@@ -11,6 +11,7 @@ This is an open-source project that combines the power of Laravel and GrapeJS to
 - [Installation](#installation)
 - [Usage](#usage)
 
+![image](https://raw.githubusercontent.com/SeptiawanAjiP/laravel-page-builder/master/img-2.png)
 ## Features
 
 - Web-based landing page generator.
