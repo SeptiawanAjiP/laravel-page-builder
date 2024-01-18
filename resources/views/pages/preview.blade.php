@@ -3,16 +3,26 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GrapesJS Preset Webpage</title>
+    <title>{{$page->title}}</title>
     <link href="{{ asset('grapesjs/css/grapes.min.css') }}" rel="stylesheet">
     <script src="{{ asset('grapesjs/js/grapes.min.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-preset-webpage.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-preset-newsletter.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-navbar.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-plugin-forms.js') }}"></script>
-    <script src="{{ asset('grapesjs/js/grapesjs-blocks-bootstrap4.min.js') }}"></script>
-    <script src="https://unpkg.com/grapesjs-blocks-flexbox@1.0.1/dist/index.js"></script>
-    <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-preset-webpage.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-component-countdown.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-plugin-export.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-tabs.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-custom-code.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-touch.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-parser-postcss.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-tooltip.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-tui-image-editor.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-typed.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-style-bg.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-blocks-flexbox.js') }}"></script>
+    <script src="{{ asset('grapesjs/js/grapesjs-blocks-basic.js') }}"></script>
     <style>
         body,
         html {
@@ -366,16 +376,11 @@
                     flexGrid: true
                 },
                 'grapesjs-tui-image-editor': {
-                    script: [
-                        // 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js',
-                        'https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js',
-                        'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js',
-                        'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.js'
-                    ],
-                    style: [
-                        'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.css',
-                        'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css',
-                    ],
+                    config: {
+                        includeUI: {
+                            initMenu: 'filter',
+                        },
+                    },
                 },
                 'grapesjs-tabs': {
                     tabsBlock: {
