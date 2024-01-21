@@ -1,6 +1,6 @@
 # Laravel + GrapeJS Project
 
-![image](https://raw.githubusercontent.com/SeptiawanAjiP/laravel-page-builder-duniacoding/master/img-1.png)
+![image](https://raw.githubusercontent.com/SeptiawanAjiP/laravel-page-builder/master/img-1.png)
 
 This is an open-source project that combines the power of Laravel and GrapeJS to create a web-based landing page generator.
 
@@ -11,7 +11,7 @@ This is an open-source project that combines the power of Laravel and GrapeJS to
 - [Installation](#installation)
 - [Usage](#usage)
 
-![image](https://raw.githubusercontent.com/SeptiawanAjiP/laravel-page-builder-duniacoding/master/img-2.png)
+![image](https://raw.githubusercontent.com/SeptiawanAjiP/laravel-page-builder/master/img-2.png)
 ## Features
 
 - Web-based landing page generator.
