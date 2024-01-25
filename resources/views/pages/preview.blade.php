@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{$page->title}}</title>
+    <title>{{ $page->title }}</title>
     <link href="{{ asset('grapesjs/css/grapes.min.css') }}" rel="stylesheet">
     <script src="{{ asset('grapesjs/js/grapes.min.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-preset-webpage.js') }}"></script>
@@ -23,6 +23,7 @@
     <script src="{{ asset('grapesjs/js/grapesjs-style-bg.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-blocks-flexbox.js') }}"></script>
     <script src="{{ asset('grapesjs/js/grapesjs-blocks-basic.js') }}"></script>
+    
     <style>
         body,
         html {
@@ -42,8 +43,8 @@
 
     <script type="text/javascript">
         const projectId = '{{ $page->id }}'
-        const loadProjectEndpoint = `{{url('/api/pages/${projectId}/load-project')}}`;
-        const storeProjectEndpoint = `{{url('/api/pages/${projectId}/store-project')}}`;
+        const loadProjectEndpoint = `{{ url('/api/pages/${projectId}/load-project') }}`;
+        const storeProjectEndpoint = `{{ url('/api/pages/${projectId}/store-project') }}`;
 
 
         window.editor = grapesjs.init({
@@ -57,7 +58,7 @@
             },
             storageManager: {
                 type: 'remote',
-                stepsBeforeSave: 3,
+                stepsBeforeSave: 1,
                 options: {
                     remote: {
                         urlLoad: loadProjectEndpoint,
@@ -410,6 +411,31 @@
                 },
             },
         });
+
+        function renderHTML() {
+            const PAGE_CONTENTS = [{
+                tagName: 'h1',
+                type: 'text',
+                components: [{
+                    type: 'textnode',
+                    removable: false,
+                    draggable: false,
+                    highlightable: 0,
+                    copyable: false,
+                    selectable: true,
+                    content: 'Dit is een test!',
+                    _innertext: false,
+                }, ],
+            }, ]
+            const editor = grapesjs.init({
+                headless: true
+            })
+            const components = editor.addComponents(PAGE_CONTENTS)
+            const html = components.map(cmp => cmp.toHTML()).join('')
+            console.log('Rendered HTML is ', html)
+        }
+
+        renderHTML()
     </script>
 </body>
 

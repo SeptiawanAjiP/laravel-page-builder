@@ -21,32 +21,36 @@
             <a href="{{ route('pages.create') }}" class="btn btn-success">+ Add</a>
         </div>
 
-        @foreach ($pages as $item)
-            <div class="card mt-3 mb-3">
-                <div class="card-header bg-primary text-white">
-                    {{ $item->title }}
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ $item->short_description }}</p>
-                    <i>Last Updated: {{ $item->updated_at }}</i>
-                </div>
-                <div class="card-footer bg-light">
-                    <a href="{{ route('pages.show', $item->id) }}" class="btn btn-primary">
-                        <i class="far fa-eye"></i> Preview
-                    </a>
-                    <a href="{{ route('pages.edit', $item->id) }}" class="btn btn-warning">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <form action="{{ route('pages.destroy', $item->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this page?')">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                    </form>
+        <div class="row">
+            @foreach ($pages as $item)
+            <div class="col-xl-4 col-lg-4 col-md-2 col-sm-12">
+                <div class="card mt-3 mb-3">
+                    <div class="card-header bg-primary text-white">
+                        {{ $item->title }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ $item->short_description }}</p>
+                        <i>Last Updated: {{ $item->updated_at }}</i>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <a href="{{ route('pages.show', $item->id) }}" class="btn btn-primary">
+                            <i class="far fa-eye"></i> Preview
+                        </a>
+                        <a href="{{ route('pages.edit', $item->id) }}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{{ route('pages.destroy', $item->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this page?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 
     <div class="container text-center mb-4">
